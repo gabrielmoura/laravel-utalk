@@ -1,0 +1,46 @@
+{
+    "name": "gabrielmoura/laravel-utalk",
+    "description": "Facade for Umbler Utalk",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "utalk"
+    ],
+    "authors": [
+        {
+            "name": "Gabriel Moura",
+            "email": "gmoura96@icloud.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Gabrielmoura\\LaravelUtalk\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.1",
+        "illuminate/http": "*"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.10",
+        "orchestra/testbench": "^8.0",
+        "laravel/pint": "^1.13"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Gabrielmoura\\LaravelUtalk\\LaravelUtalkServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@prepare",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "test": "@php vendor/bin/phpunit --colors=always",
+        "phpstan": "@php vendor/bin/phpstan --no-progress --no-interaction --ansi --error-format=github",
+        "pint": "@php vendor/bin/pint"
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}
