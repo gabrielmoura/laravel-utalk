@@ -1,5 +1,11 @@
 # Laravel Utalk
 
+## Objetivo
+
+Nesta versão, o propósito é estabelecer uma integração com o serviço de mensageria Utalk para o envio e recebimento de
+mensagens. No entanto, as funcionalidades atualmente implementadas refletem apenas a utilização rudimentar da API.
+
+
 ### WebHook IPs
 
 Caso sua aplicação esteja em um ambiente que necessite de liberação de IPs, utilize os seguintes IPs:
@@ -15,10 +21,6 @@ da mensagem recebida.
 
 use /webhook/utalk ou webhook.utalk
 
-## Objetivo
-
-Nesta versão, o propósito é estabelecer uma integração com o serviço de mensageria Utalk para o envio e recebimento de
-mensagens. No entanto, as funcionalidades atualmente implementadas refletem apenas a utilização rudimentar da API.
 
 ### Send Message
 
