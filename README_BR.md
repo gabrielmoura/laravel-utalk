@@ -13,13 +13,12 @@ Certos webhooks retransmitem a mensagem se não receberem um código de resposta
 essencial que a rota responsável pelo recebimento do webhook emita um código de sucesso antes de proceder ao tratamento
 da mensagem recebida.
 
-```php
-// Route: routes/web.php
-    Route::any('/utalk', function () {
-        event(new UtalkWebhookEvent(request()->all()));
-        return response()->noContent();
-    })->name('utalk');
-```
+use /webhook/utalk ou webhook.utalk
+
+## Objetivo
+
+Nesta versão, o propósito é estabelecer uma integração com o serviço de mensageria Utalk para o envio e recebimento de
+mensagens. No entanto, as funcionalidades atualmente implementadas refletem apenas a utilização rudimentar da API.
 
 ### Send Message
 
@@ -41,7 +40,7 @@ da mensagem recebida.
 
 namespace App\Listeners;
 
-use Gabrielmoura\LaravelUtalk\Entities\PayloadEvent;
+use Gabrielmoura\LaravelUtalk\Events\UtalkWebhookEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
@@ -61,7 +60,7 @@ class UtalkMessageRcvListener implements ShouldQueue
     /**
      * Handle the event.
      */
-    public function handle(PayloadEvent $event): void
+    public function handle(UtalkWebhookEvent $event): void
     {
         if ($event->type == 'Message') {
             Log::debug("Mensagem Recebida", (array)$event);
@@ -71,6 +70,18 @@ class UtalkMessageRcvListener implements ShouldQueue
 
     }
 }
+```
+
+### Configurações
+
+```php
+/** config/services.php **/
+
+'utalk' => [
+        'key' => env('UTALK_KEY'),
+        'organizationId'=>env('UTALK_ORGANIZATION_ID'),
+        'channelId'=> env('UTALK_CHANNEL_ID'),
+    ],
 ```
 
 ## Aviso de Responsabilidade e Colaboração para Desenvolvimento

@@ -19,19 +19,20 @@ class LaravelUtalkServiceProvider extends ServiceProvider
         $this->listenForEvents();
     }
 
-    protected function listenForEvents():void
+    protected function listenForEvents(): void
     {
         $this->app['router']->post('/webhook/utalk', function () {
             $req = request()->all();
             UtalkWebhookEvent::dispatch($req);
+
             return response()->noContent();
         })->name('webhook.utalk');
 
         //        $this->app['events']->listen([
-//            UtalkWebhookEvent::class,
-//        ],[
-//            \Gabrielmoura\LaravelUtalk\Listeners\UtalkWebhookListener::class,
-//        ]);
+        //            UtalkWebhookEvent::class,
+        //        ],[
+        //            \Gabrielmoura\LaravelUtalk\Listeners\UtalkWebhookListener::class,
+        //        ]);
     }
 
     public function provides(): array
