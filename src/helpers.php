@@ -1,11 +1,11 @@
 <?php
 
-use Gabrielmoura\LaravelUtalk\Utalk;
+use Gabrielmoura\LaravelUtalk\UtalkService;
 
 if (! function_exists('utalk')) {
 
-    function utalk(): Utalk
+    function utalk(): UtalkService
     {
-        return app('Utalk');
+        return app(UtalkService::class);
     }
 }
