@@ -3,6 +3,7 @@
 namespace Gabrielmoura\LaravelUtalk;
 
 use Gabrielmoura\LaravelUtalk\Events\UtalkWebhookEvent;
+use Gabrielmoura\LaravelUtalk\middleware\RestrictIPMiddleware;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,7 +31,8 @@ class LaravelUtalkServiceProvider extends ServiceProvider
             UtalkWebhookEvent::dispatch($req);
 
             return response()->noContent();
-        })->name('webhook.utalk');
+        })->middleware(RestrictIPMiddleware::class)
+            ->name('webhook.utalk');
     }
 
     public function provides(): array
