@@ -5,7 +5,23 @@
 Nesta versão, o propósito é estabelecer uma integração com o serviço de mensageria Utalk para o envio e recebimento de
 mensagens. No entanto, as funcionalidades atualmente implementadas refletem apenas a utilização rudimentar da API.
 
+## Uso
 
+### Facade
+```php
+use Gabrielmoura\LaravelUtalk\Utalk;
+Utalk::member()->getMe();
+```
+
+### Container
+```php
+app('Utalk')->member()->getMe();
+```
+
+### Helper
+```php
+utalk()->member()->getMe();
+```
 ### WebHook IPs
 
 Caso sua aplicação esteja em um ambiente que necessite de liberação de IPs, utilize os seguintes IPs:

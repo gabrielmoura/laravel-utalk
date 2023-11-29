@@ -29,10 +29,11 @@ class Webhook extends UtalkBase
     /**
      * @description Atribui um webhook
      *
-     * @param string $organizationId ID da organização
-     * @param string $name Nome do webhook
-     * @param string $url URL do webhook
-     * @param array $channelIds IDs dos canais
+     * @param  string  $organizationId ID da organização
+     * @param  string  $name Nome do webhook
+     * @param  string  $url URL do webhook
+     * @param  array  $channelIds IDs dos canais
+     *
      * @throws UtalkException
      */
     public function set(string $organizationId, string $name, string $url, array $channelIds): Collection
@@ -60,16 +61,16 @@ class Webhook extends UtalkBase
     public function setMe(): Collection
     {
         $route = route('webhook.utalk');
-        if (!$route) {
+        if (! $route) {
             throw new UtalkException('Route webhook.utalk not found');
         }
         $organizationId = config('services.utalk.organization_id');
-        if (!$organizationId) {
+        if (! $organizationId) {
             throw new UtalkException('Organization ID not found');
         }
         $name = 'Webhook Laravel Utalk';
         $channelIds = [config('services.utalk.channel_id')];
-        if (!$channelIds[0]) {
+        if (! $channelIds[0]) {
             throw new UtalkException('Channel ID not found');
         }
 
@@ -79,7 +80,6 @@ class Webhook extends UtalkBase
     /**
      * @description Retorna os IPs dos webhooks
      *
-     * @return Collection
      * @throws UtalkException
      */
     public function getIpList(): Collection

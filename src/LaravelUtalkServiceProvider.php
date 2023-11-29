@@ -2,7 +2,6 @@
 
 namespace Gabrielmoura\LaravelUtalk;
 
-//use Illuminate\Container\Container;
 use Gabrielmoura\LaravelUtalk\Events\UtalkWebhookEvent;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
@@ -11,7 +10,11 @@ class LaravelUtalkServiceProvider extends ServiceProvider
 {
     public function register()
     {
+        // Registra a classe de serviço
         $this->app->singleton(UtalkService::class, fn (Application $app) => new UtalkService());
+
+        // Registra o facade
+        $this->app->alias(Utalk::class, 'Utalk');
     }
 
     public function boot(): void
@@ -21,18 +24,13 @@ class LaravelUtalkServiceProvider extends ServiceProvider
 
     protected function listenForEvents(): void
     {
+        // Registra a rota para receber o webhook
         $this->app['router']->post('/webhook/utalk', function () {
             $req = request()->all();
             UtalkWebhookEvent::dispatch($req);
 
             return response()->noContent();
         })->name('webhook.utalk');
-
-        //        $this->app['events']->listen([
-        //            UtalkWebhookEvent::class,
-        //        ],[
-        //            \Gabrielmoura\LaravelUtalk\Listeners\UtalkWebhookListener::class,
-        //        ]);
     }
 
     public function provides(): array
