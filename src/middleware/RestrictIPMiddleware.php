@@ -34,8 +34,8 @@ class RestrictIPMiddleware
      */
     private function getIp(): array
     {
-        $localIPs = ['127.0.0.1/8', '192.168.0.1/16', '10.0.0.1/24'];
-        $ipsUtalk = [
+        $localIPs = ['127.0.0.1/8', '192.168.0.1/16', '10.0.0.1/24', '172.16.0.0/12'];
+        $ipsUtalk = config('services.utalk.allow_ips', [
             '40.88.132.66/32',
             '52.188.209.245/32',
             '52.188.209.200/32',
@@ -43,7 +43,7 @@ class RestrictIPMiddleware
             '13.82.149.8/32',
             '20.121.215.166/32',
             '52.191.24.158/32',
-        ];
+        ]);
 
         return array_merge($localIPs, $ipsUtalk);
     }
@@ -59,7 +59,7 @@ class RestrictIPMiddleware
         [$subnet, $mask] = explode('/', $cidr);
 
         // Verificar se o IP e a máscara são válidos
-        if (! $subnet || ! $mask) {
+        if (!$subnet || !$mask) {
             throw new InvalidArgumentException('Formato CIDR inválido');
         }
 
@@ -71,7 +71,7 @@ class RestrictIPMiddleware
             throw new InvalidArgumentException('Endereço IP ou CIDR inválido');
         }
 
-        $maskDecimal = -1 << (32 - (int) $mask);
+        $maskDecimal = -1 << (32 - (int)$mask);
 
         $subnetStart = $subnetDecimal & $maskDecimal;
         $subnetEnd = $subnetStart + ~$maskDecimal;

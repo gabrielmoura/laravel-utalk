@@ -22,12 +22,42 @@ app('Utalk')->member()->getMe();
 ```php
 utalk()->member()->getMe();
 ```
-### WebHook IPs
 
-Caso sua aplicação esteja em um ambiente que necessite de liberação de IPs, utilize os seguintes IPs:
+## WebHook IPs
 
-* 40.88.132.66
-* 52.188.209.245
+É possível obter a lista de IPs que serão utilizados para o envio das mensagens.
+
+```php
+utalk()->webhook()->getIps();
+```
+e definir-los em config/services.php
+
+```php
+'allow_ips' =>
+            [
+                '40.88.132.66/32',
+                '52.188.209.245/32',
+                '52.188.209.200/32',
+                '40.88.5.13/32',
+                '13.82.149.8/32',
+                '20.121.215.166/32',
+                '52.191.24.158/32',
+            ]
+```
+
+Por padrão o pacote verifica se o IP se enquadra na lista de IPs permitidos:
+ 
+- 127.0.0.1/8
+- 192.168.0.1/16
+- 10.0.0.1/24
+- 172.16.0.0/12
+- 40.88.132.66/32
+- 52.188.209.245/32
+- 52.188.209.200/32
+- 40.88.5.13/32
+- 13.82.149.8/32
+- 20.121.215.166/32
+- 52.191.24.158/32
 
 ### Route WebHook
 
