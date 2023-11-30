@@ -30,7 +30,6 @@ class RestrictIPMiddleware
 
     /**
      * @description Get the allowed IPs.
-     * @return array
      */
     private function getIp(): array
     {
@@ -50,16 +49,16 @@ class RestrictIPMiddleware
 
     /**
      * @description  Check if an IP is in a CIDR range.
-     * @param string $ip IP to check in IPV4 format.
-     * @param string $cidr IP in CIDR format.
-     * @return bool
+     *
+     * @param  string  $ip IP to check in IPV4 format.
+     * @param  string  $cidr IP in CIDR format.
      */
     private function ipInCidrRange(string $ip, string $cidr): bool
     {
         [$subnet, $mask] = explode('/', $cidr);
 
         // Verificar se o IP e a máscara são válidos
-        if (!$subnet || !$mask) {
+        if (! $subnet || ! $mask) {
             throw new InvalidArgumentException('Formato CIDR inválido');
         }
 
@@ -71,7 +70,7 @@ class RestrictIPMiddleware
             throw new InvalidArgumentException('Endereço IP ou CIDR inválido');
         }
 
-        $maskDecimal = -1 << (32 - (int)$mask);
+        $maskDecimal = -1 << (32 - (int) $mask);
 
         $subnetStart = $subnetDecimal & $maskDecimal;
         $subnetEnd = $subnetStart + ~$maskDecimal;

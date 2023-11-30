@@ -65,7 +65,10 @@ Certos webhooks retransmitem a mensagem se não receberem um código de resposta
 essencial que a rota responsável pelo recebimento do webhook emita um código de sucesso antes de proceder ao tratamento
 da mensagem recebida.
 
-use /webhook/utalk ou webhook.utalk
+```php
+// routes/web.php
+    Route::utalk()
+```
 
 
 ### Send Message

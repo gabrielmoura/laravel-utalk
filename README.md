@@ -32,7 +32,10 @@ If your application is in an environment that requires IP whitelisting, use the 
 
 Certain webhooks resend the message if they do not receive an HTTP response code in the 20x range. Therefore, it is essential that the route responsible for receiving the webhook emits a success code before proceeding to handle the received message.
 
-Use /webhook/utalk or webhook.utalk.
+```php
+// routes/web.php
+    Route::utalk()
+```
 
 ### Send Message
 
