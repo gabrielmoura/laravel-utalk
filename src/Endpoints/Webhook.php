@@ -2,7 +2,6 @@
 
 namespace Gabrielmoura\LaravelUtalk\Endpoints;
 
-use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Collection;
 
 class Webhook extends UtalkBase
@@ -19,9 +18,7 @@ class Webhook extends UtalkBase
             ->get('/webhooks/', [
                 'organizationId' => $organizationId,
             ]);
-        $req->onError(function (RequestException $e) {
-            throw new UtalkException($e->getMessage(), $e->getCode());
-        });
+        $req->onError(fn ($e) => $this->error($e));
 
         return $req->collect();
     }
@@ -46,9 +43,7 @@ class Webhook extends UtalkBase
                 'url' => $url,
                 'channelIds' => $channelIds,
             ]);
-        $req->onError(function (RequestException $e) {
-            throw new UtalkException($e->getMessage(), $e->getCode());
-        });
+        $req->onError(fn ($e) => $this->error($e));
 
         return $req->collect();
     }
@@ -87,9 +82,7 @@ class Webhook extends UtalkBase
         $req = $this->service
             ->refreshToken()
             ->get('/webhooks/ranges/');
-        $req->onError(function (RequestException $e) {
-            throw new UtalkException($e->getMessage(), $e->getCode());
-        });
+        $req->onError(fn ($e) => $this->error($e));
 
         return $req->collect();
     }

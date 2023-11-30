@@ -2,14 +2,14 @@
 
 namespace Gabrielmoura\LaravelUtalk;
 
-use Gabrielmoura\LaravelUtalk\Endpoints\HasActivityLog;
-use Gabrielmoura\LaravelUtalk\Endpoints\HasChannel;
-use Gabrielmoura\LaravelUtalk\Endpoints\HasChat;
-use Gabrielmoura\LaravelUtalk\Endpoints\HasMember;
-use Gabrielmoura\LaravelUtalk\Endpoints\HasMessage;
-use Gabrielmoura\LaravelUtalk\Endpoints\HasOrganizationInvites;
-use Gabrielmoura\LaravelUtalk\Endpoints\HasSector;
-use Gabrielmoura\LaravelUtalk\Endpoints\HasWebhook;
+use Gabrielmoura\LaravelUtalk\Traits\HasActivityLog;
+use Gabrielmoura\LaravelUtalk\Traits\HasChannel;
+use Gabrielmoura\LaravelUtalk\Traits\HasChat;
+use Gabrielmoura\LaravelUtalk\Traits\HasMember;
+use Gabrielmoura\LaravelUtalk\Traits\HasMessage;
+use Gabrielmoura\LaravelUtalk\Traits\HasOrganizationInvites;
+use Gabrielmoura\LaravelUtalk\Traits\HasSector;
+use Gabrielmoura\LaravelUtalk\Traits\HasWebhook;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 

@@ -51,6 +51,10 @@ class Chat extends UtalkBase
 
     /**
      * @description Busca os chats começados pelos clientes e não lidos
+     *
+     * @param  string  $idChat Id do chat
+     * @param  string  $organizationId Id da organização
+     * @return Collection<int,ChatEntity>
      */
     public function getUnread(string $idChat, string $organizationId): Collection
     {
@@ -65,9 +69,7 @@ class Chat extends UtalkBase
                 'Take' => 50,
                 'Behavior' => 'GetSliceOnly',
             ]);
-        $req->onError(function (RequestException $e) {
-            throw new UtalkException($e->response->json() ?? 'HTTP request returned status code '.$e->response->status(), $e->response->status());
-        });
+        $req->onError(fn ($e) => $this->error($e));
 
         return $this->transform(
             $req->json('items'),

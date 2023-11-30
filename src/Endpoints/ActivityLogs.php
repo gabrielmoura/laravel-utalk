@@ -2,13 +2,14 @@
 
 namespace Gabrielmoura\LaravelUtalk\Endpoints;
 
-use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Collection;
 
 class ActivityLogs extends UtalkBase
 {
     /**
      * @description Busca os logs de atividade
+     *
+     * @return Collection<string, array<string, mixed>>
      */
     public function get(string $organizationId): Collection
     {
@@ -17,9 +18,7 @@ class ActivityLogs extends UtalkBase
             ->get('/activity-logs/', [
                 'organizationId' => $organizationId,
             ]);
-        $req->onError(function (RequestException $e) {
-            throw new UtalkException($e->response->json() ?? 'HTTP request returned status code '.$e->response->status(), $e->response->status());
-        });
+        $req->onError(fn ($e) => $this->error($e));
 
         return $req->collect();
     }

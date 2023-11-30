@@ -13,7 +13,7 @@ class UtalkException extends DomainException
      */
     public function __construct(string $message, int $code = 0, Exception $previous = null)
     {
-        $message = 'UTalk: '.$message;
+        $message = "UTalk: $message";
         parent::__construct($message, $code, $previous);
     }
 

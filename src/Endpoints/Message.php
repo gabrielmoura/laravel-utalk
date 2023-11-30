@@ -4,7 +4,6 @@ namespace Gabrielmoura\LaravelUtalk\Endpoints;
 
 use Gabrielmoura\LaravelUtalk\Entities\MessageEntity;
 use Gabrielmoura\LaravelUtalk\Validation\Validation;
-use Illuminate\Http\Client\RequestException;
 
 class Message extends UtalkBase
 {
@@ -41,9 +40,7 @@ class Message extends UtalkBase
                 'file' => $file,
                 'skipReassign' => $skipReassign,
             ]);
-        $req->onError(function (RequestException $e) {
-            throw new UtalkException($e->getMessage(), $e->getCode());
-        });
+        $req->onError(fn ($e) => $this->error($e));
 
         return new MessageEntity($req->json());
     }
@@ -61,9 +58,7 @@ class Message extends UtalkBase
             ->post("/messages/$messageId/", [
                 'organizationId' => $organizationId,
             ]);
-        $req->onError(function (RequestException $e) {
-            throw new UtalkException($e->getMessage(), $e->getCode());
-        });
+        $req->onError(fn ($e) => $this->error($e));
 
         return new MessageEntity($req->json());
     }
@@ -111,9 +106,7 @@ class Message extends UtalkBase
                 'tempId' => $tempId,
                 'file' => $file,
             ]);
-        $req->onError(function (RequestException $e) {
-            throw new UtalkException($e->getMessage(), $e->getCode());
-        });
+        $req->onError(fn ($e) => $this->error($e));
 
         return new MessageEntity($req->json());
     }

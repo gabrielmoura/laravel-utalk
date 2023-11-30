@@ -2,8 +2,6 @@
 
 namespace Gabrielmoura\LaravelUtalk\Endpoints;
 
-use Illuminate\Http\Client\RequestException;
-
 class OrganizationInvites extends UtalkBase
 {
     /**
@@ -19,9 +17,7 @@ class OrganizationInvites extends UtalkBase
             ->get('/organization-invites/', [
                 'organizationId' => $organizationId,
             ]);
-        $req->onError(function (RequestException $e) {
-            throw new UtalkException($e->response->json() ?? 'HTTP request returned status code '.$e->response->status(), $e->response->status());
-        });
+        $req->onError(fn ($e) => $this->error($e));
 
         return $req->json();
     }
@@ -48,9 +44,7 @@ class OrganizationInvites extends UtalkBase
                 'allowedSector' => $allowedSector,
                 'allowedChannel' => $allowedChannel,
             ]);
-        $req->onError(function (RequestException $e) {
-            throw new UtalkException($e->response->json() ?? 'HTTP request returned status code '.$e->response->status(), $e->response->status());
-        });
+        $req->onError(fn ($e) => $this->error($e));
 
         return $req->json();
     }

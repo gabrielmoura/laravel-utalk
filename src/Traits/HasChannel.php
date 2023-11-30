@@ -1,6 +1,8 @@
 <?php
 
-namespace Gabrielmoura\LaravelUtalk\Endpoints;
+namespace Gabrielmoura\LaravelUtalk\Traits;
+
+use Gabrielmoura\LaravelUtalk\Endpoints\Channel;
 
 trait HasChannel
 {

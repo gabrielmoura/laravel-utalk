@@ -30,6 +30,8 @@ class RestrictIPMiddleware
 
     /**
      * @description Get the allowed IPs.
+     *
+     * @return array<string>
      */
     private function getIp(): array
     {

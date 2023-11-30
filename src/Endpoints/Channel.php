@@ -3,7 +3,6 @@
 namespace Gabrielmoura\LaravelUtalk\Endpoints;
 
 use Gabrielmoura\LaravelUtalk\Entities\ChannelEntity as ChannelEntity;
-use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Collection;
 
 class Channel extends UtalkBase
@@ -18,9 +17,7 @@ class Channel extends UtalkBase
             ->get('/channels/', [
                 'organizationId' => $organizationId,
             ]);
-        $req->onError(function (RequestException $e) {
-            throw new UtalkException($e->getMessage(), $e->getCode());
-        });
+        $req->onError(fn ($e) => $this->error($e));
 
         return $this->transform($req->json(),
             ChannelEntity::class);

@@ -3,7 +3,6 @@
 namespace Gabrielmoura\LaravelUtalk\Endpoints;
 
 use Gabrielmoura\LaravelUtalk\Entities\SectorEntity;
-use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Collection;
 
 class Sector extends UtalkBase
@@ -20,9 +19,7 @@ class Sector extends UtalkBase
             ->get('/sectors/', [
                 'organizationId' => $organizationId,
             ]);
-        $req->onError(function (RequestException $e) {
-            throw new UtalkException($e->getMessage(), $e->getCode());
-        });
+        $req->onError(fn ($e) => $this->error($e));
 
         return $this->transform($req->json(),
             SectorEntity::class);

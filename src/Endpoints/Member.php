@@ -3,7 +3,6 @@
 namespace Gabrielmoura\LaravelUtalk\Endpoints;
 
 use Gabrielmoura\LaravelUtalk\Entities\MemberEntity;
-use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Collection;
 
 class Member extends UtalkBase
@@ -18,9 +17,7 @@ class Member extends UtalkBase
         $req = $this->service
             ->refreshToken()
             ->get('/members/me/');
-        $req->onError(function (RequestException $e) {
-            throw new UtalkException($e->getMessage(), $e->getCode());
-        });
+        $req->onError(fn ($e) => $this->error($e));
 
         return new MemberEntity($req->json());
     }
@@ -35,9 +32,7 @@ class Member extends UtalkBase
             ->get('/members/online/', [
                 'organizationId' => $organizationId,
             ]);
-        $req->onError(function (RequestException $e) {
-            throw new UtalkException($e->getMessage(), $e->getCode());
-        });
+        $req->onError(fn ($e) => $this->error($e));
 
         return $this->transform($req->json(), MemberEntity::class);
     }
