@@ -8,6 +8,7 @@ use Gabrielmoura\LaravelUtalk\Traits\HasChat;
 use Gabrielmoura\LaravelUtalk\Traits\HasMember;
 use Gabrielmoura\LaravelUtalk\Traits\HasMessage;
 use Gabrielmoura\LaravelUtalk\Traits\HasOrganizationInvites;
+use Gabrielmoura\LaravelUtalk\Traits\HasReport;
 use Gabrielmoura\LaravelUtalk\Traits\HasSector;
 use Gabrielmoura\LaravelUtalk\Traits\HasWebhook;
 use Illuminate\Http\Client\PendingRequest;
@@ -34,6 +35,7 @@ class UtalkService
     use HasMember;
     use HasMessage;
     use HasOrganizationInvites;
+    use HasReport;
     use HasSector;
     use HasWebhook;
 

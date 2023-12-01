@@ -110,4 +110,26 @@ class Message extends UtalkBase
 
         return new MessageEntity($req->json());
     }
+
+    /**
+     * @description Deleta uma mensagem
+     *
+     * @param  string  $organizationId Id da organização
+     * @param  string  $messageId Id da mensagem
+     * @param  bool  $deleteForEveryone Se true, a mensagem será deletada para todos
+     */
+    public function delete(string $organizationId, string $messageId, bool $deleteForEveryone = true): MessageEntity
+    {
+        $params = [
+            'deleteForEveryone' => $deleteForEveryone,
+            'organizationId' => $organizationId,
+        ];
+
+        $req = $this->service
+            ->refreshToken()
+            ->delete("/messages/$messageId/".http_build_query($params), $params);
+        $req->onError(fn ($e) => $this->error($e));
+
+        return new MessageEntity($req->json());
+    }
 }
