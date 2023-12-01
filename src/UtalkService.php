@@ -5,6 +5,7 @@ namespace Gabrielmoura\LaravelUtalk;
 use Gabrielmoura\LaravelUtalk\Traits\HasActivityLog;
 use Gabrielmoura\LaravelUtalk\Traits\HasChannel;
 use Gabrielmoura\LaravelUtalk\Traits\HasChat;
+use Gabrielmoura\LaravelUtalk\Traits\HasContact;
 use Gabrielmoura\LaravelUtalk\Traits\HasMember;
 use Gabrielmoura\LaravelUtalk\Traits\HasMessage;
 use Gabrielmoura\LaravelUtalk\Traits\HasOrganizationInvites;
@@ -32,6 +33,7 @@ class UtalkService
     use HasActivityLog;
     use HasChannel;
     use HasChat;
+    use HasContact;
     use HasMember;
     use HasMessage;
     use HasOrganizationInvites;
