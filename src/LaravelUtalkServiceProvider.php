@@ -4,13 +4,16 @@ namespace Gabrielmoura\LaravelUtalk;
 
 use Gabrielmoura\LaravelUtalk\Events\UtalkWebhookEvent;
 use Gabrielmoura\LaravelUtalk\middleware\RestrictIPMiddleware;
+use Gabrielmoura\LaravelUtalk\Notification\UtalkChannel;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Notifications\ChannelManager;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelUtalkServiceProvider extends ServiceProvider
 {
-    public function register()
+    public function register(): void
     {
         // Registra a classe de serviço
         $this->app->singleton(UtalkService::class, fn (Application $app) => new UtalkService());
@@ -56,6 +59,23 @@ class LaravelUtalkServiceProvider extends ServiceProvider
         return $this;
     }
 
+    /**
+     * @return $this
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    protected function registerNotificationChannels(): static
+    {
+        Notification::resolved(function (ChannelManager $service) {
+            $service->extend('utalk', fn ($app) => $this->app->make(UtalkChannel::class));
+        });
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
     public function provides(): array
     {
         return [

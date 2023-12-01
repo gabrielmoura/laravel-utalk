@@ -17,11 +17,11 @@ class PayloadEvent
 
     public array $organization;
 
-    public $contact;
+    public ?ContactEntity $contact;
 
-    public $channel;
+    public ?ChannelEntity $channel;
 
-    public $sector;
+    public ?SectorEntity $sector;
 
     public $organizationMembers;
 
@@ -35,11 +35,11 @@ class PayloadEvent
 
     public $unread;
 
-    public $eventAtUTC;
+    public ?string $eventAtUTC;
 
-    public $id;
+    public string $id;
 
-    public $createdAtUTC;
+    public string $createdAtUTC;
 
     public function __construct($payload)
     {

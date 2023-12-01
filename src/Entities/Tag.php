@@ -16,6 +16,9 @@ class Tag
 
     public ?string $createdAtUTC;
 
+    /**
+     * @phpstan-param array{ _t: string, name: string, emoji: string, color: string, order: int, createdAtUTC: string } $data
+     */
     public function __construct(array|object $data)
     {
         $this->_t = data_get($data, '_t');
@@ -26,6 +29,9 @@ class Tag
         $this->createdAtUTC = data_get($data, 'createdAtUTC');
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [
