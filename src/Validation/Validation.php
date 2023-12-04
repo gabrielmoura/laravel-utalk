@@ -40,11 +40,15 @@ class Validation
      * @param  string  $value Valor a ser validado
      * @param  int  $smallerThen Valor máximo mínimo
      * @param  string  $field Nome do campo
+     * @param  bool  $nullable Se o campo pode ser nulo
      *
      * @throws UtalkException
      */
-    public static function strSmallerThen(string $value, int $smallerThen, string $field): void
+    public static function strSmallerThen(string $value, int $smallerThen, string $field, bool $nullable = false): void
     {
+        if ($value == null && $nullable) {
+            return;
+        }
         if (strlen($value) <= $smallerThen) {
             throw new UtalkException("O $field deve ter no máximo $smallerThen caracteres");
         }
@@ -56,11 +60,15 @@ class Validation
      * @param  string  $value Valor a ser validado
      * @param  int  $biggerThen Valor mínimo
      * @param  string  $field Nome do campo
+     * @param  bool  $nullable Se o campo pode ser nulo
      *
      * @throws UtalkException
      */
-    public static function strBiggerThen(string $value, int $biggerThen, string $field): void
+    public static function strBiggerThen(string $value, int $biggerThen, string $field, bool $nullable = false): void
     {
+        if ($value == null && $nullable) {
+            return;
+        }
         if (strlen($value) >= $biggerThen) {
             throw new UtalkException("O $field deve ter pelo menos $biggerThen caracteres");
         }
