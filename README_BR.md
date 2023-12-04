@@ -1,35 +1,60 @@
-# Laravel Utalk
+<p align="center">
+<img src="doc/laravel-utalk.webp" alt="Laravel Utalk"/>
+</p>
+
+<p align="center">
+<a href="https://packagist.org/packages/gabrielmoura/laravel-utalk"><img src="https://img.shields.io/packagist/v/gabrielmoura/laravel-utalk" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/gabrielmoura/laravel-utalk"><img src="https://img.shields.io/packagist/l/gabrielmoura/laravel-utalk" alt="License"></a>
+</p>
+
+- [Objetivo](#objetivo)
+- [Uso](#uso)
+    - [Facade](#facade)
+    - [Container](#container)
+    - [Helper](#helper)
+- [WebHook](#webhook)
+- [Configurações](#configurações)
+- [Documentação](doc/DOC_BR.md)
 
 ## Objetivo
 
 Nesta versão, o propósito é estabelecer uma integração com o serviço de mensageria Utalk para o envio e recebimento de
-mensagens. No entanto, as funcionalidades atualmente implementadas refletem apenas a utilização rudimentar da API.
+mensagens. No entanto, as funcionalidades atualmente implementadas refletem apenas a utilização rudimentar da API e não
+há qualquer processo de automação.
 
 ## Uso
 
 ### Facade
+
 ```php
 use Gabrielmoura\LaravelUtalk\Utalk;
 Utalk::member()->getMe();
 ```
 
 ### Container
+
 ```php
 app('Utalk')->member()->getMe();
 ```
 
 ### Helper
+
 ```php
 utalk()->member()->getMe();
 ```
 
-## WebHook IPs
+## WebHook
+
+### IPs
 
 É possível obter a lista de IPs que serão utilizados para o envio das mensagens.
 
 ```php
 utalk()->webhook()->getIps();
 ```
+
+### Configuração Opcional
+
 e definir-los em config/services.php
 
 ```php
@@ -46,7 +71,7 @@ e definir-los em config/services.php
 ```
 
 Por padrão o pacote verifica se o IP se enquadra na lista de IPs permitidos:
- 
+
 - 127.0.0.1/8
 - 192.168.0.1/16
 - 10.0.0.1/24
@@ -59,29 +84,18 @@ Por padrão o pacote verifica se o IP se enquadra na lista de IPs permitidos:
 - 20.121.215.166/32
 - 52.191.24.158/32
 
-### Route WebHook
+### Rota WebHook
 
 Certos webhooks retransmitem a mensagem se não receberem um código de resposta HTTP na faixa de 20x. Portanto, torna-se
 essencial que a rota responsável pelo recebimento do webhook emita um código de sucesso antes de proceder ao tratamento
 da mensagem recebida.
 
+Este pacote fornece uma rota para o recebimento de webhooks e middleware para a verificação do IP de origem, para fazer
+uso basta adicionar a rota no arquivo de rotas que corresponderá a _**/webhook/utalk**_
+
 ```php
 // routes/web.php
     Route::utalk()
-```
-
-
-### Send Message
-
-```php
-// Send Message
-    $utalk = new UtalkService();
-    $utalk->message()->set(
-        fromPhone: '+55***********',
-        toPhone: '+55***********',
-        organizationId: '********',
-        message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-    );
 ```
 
 É encorajado a criação de um Listener para o evento de recebimento das mensagens pelo evento.
@@ -123,7 +137,19 @@ class UtalkMessageRcvListener implements ShouldQueue
 }
 ```
 
-### Configurações
+## Enviando mensagem
+
+```php
+    $utalk = new UtalkService();
+    $utalk->message()->set(
+        fromPhone: '+55***********',
+        toPhone: '+55***********',
+        organizationId: '********',
+        message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    );
+```
+
+## Configurações
 
 ```php
 /** config/services.php **/
@@ -145,6 +171,8 @@ Caso você identifique qualquer erro, bug ou tenha sugestões para melhorias ou 
 compartilhe conosco suas descobertas através de Pull Requests no repositório oficial. Acreditamos que a colaboração
 mútua é essencial para a evolução do software e a criação de um ambiente mais robusto e confiável para todos os
 usuários.
+
+Este não é um pacote desenvolvido pela Umbler e sim um pacote de terceiro para integração com o serviço de mensageria.
 
 Agradecemos pela compreensão e pela sua contribuição para o aprimoramento contínuo deste projeto.
 
