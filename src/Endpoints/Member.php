@@ -24,6 +24,8 @@ class Member extends UtalkBase
 
     /**
      * @description Retorna os usuários online
+     *
+     * @param  string  $organizationId O ID da organização
      */
     public function getOnline(string $organizationId): Collection
     {

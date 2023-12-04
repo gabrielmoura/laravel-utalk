@@ -9,7 +9,7 @@ class Webhook extends UtalkBase
     /**
      * @description Retorna os webhooks
      *
-     * @throws UtalkException
+     * @param  string  $organizationId ID da organização
      */
     public function get(string $organizationId): Collection
     {

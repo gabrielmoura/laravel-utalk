@@ -10,6 +10,7 @@ class Contact extends UtalkBase
      * @description Retorna todos os contatos de uma organização
      *
      * @param  string  $organizationId "AB_12-xyzEXAMPLE"
+     * @param  bool  $includeGroups Se true, inclui os grupos do contato
      */
     public function getAll(string $organizationId, int $skip = 0, int $take = 25, bool $includeGroups = true): Collection
     {

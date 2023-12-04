@@ -9,6 +9,8 @@ class Channel extends UtalkBase
 {
     /**
      * @description Busca os canais de atendimento
+     *
+     * @param  string  $organizationId O ID da organização
      */
     public function channels(string $organizationId): Collection
     {

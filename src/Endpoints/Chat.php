@@ -10,6 +10,9 @@ class Chat extends UtalkBase
 {
     /**
      * @description Busca um chat pelo id
+     *
+     * @param  string  $idChat Id do chat
+     * @param  string  $organizationId Id da organização
      */
     public function get(string $idChat, string $organizationId): ChatEntity
     {
@@ -61,6 +64,8 @@ class Chat extends UtalkBase
 
     /**
      * @description Retorna todos os chats
+     *
+     * @param  string  $organizationId Id da organização
      */
     public function getAll(string $organizationId): Collection
     {
@@ -90,6 +95,9 @@ class Chat extends UtalkBase
 
     /**
      * @description Põe na fila de espera
+     *
+     * @param  string  $idChat Id do chat
+     * @param  string  $organizationId Id da organização
      */
     public function setWaiting(string $idChat, string $organizationId): ChatEntity
     {
@@ -110,6 +118,9 @@ class Chat extends UtalkBase
 
     /**
      * @description Marca Chat como não lido
+     *
+     * @param  string  $idChat Id do chat
+     * @param  string  $organizationId Id da organização
      */
     public function setUnread(string $idChat, string $organizationId): ChatEntity
     {
