@@ -9,8 +9,11 @@ use Gabrielmoura\LaravelUtalk\Endpoints\Chat;
 use Gabrielmoura\LaravelUtalk\Endpoints\Contact;
 use Gabrielmoura\LaravelUtalk\Endpoints\Member;
 use Gabrielmoura\LaravelUtalk\Endpoints\Message;
+use Gabrielmoura\LaravelUtalk\Endpoints\Notifications;
 use Gabrielmoura\LaravelUtalk\Endpoints\OrganizationInvites;
+use Gabrielmoura\LaravelUtalk\Endpoints\QuickAnswers;
 use Gabrielmoura\LaravelUtalk\Endpoints\Report;
+use Gabrielmoura\LaravelUtalk\Endpoints\ScheduledMessage;
 use Gabrielmoura\LaravelUtalk\Endpoints\Sector;
 use Gabrielmoura\LaravelUtalk\Endpoints\Webhook;
 use Illuminate\Http\Client\PendingRequest;
@@ -28,6 +31,9 @@ use Illuminate\Support\Facades\Facade;
  * @method Report report() Report
  * @method Contact contact() Contact
  * @method Bot bot() Bot
+ * @method Notifications notification() Notifications
+ * @method QuickAnswers quickAnswers() QuickAnswers
+ * @method ScheduledMessage scheduled() ScheduledMessage
  * @method withToken(string $token)
  * @method refreshToken(string $token = null)
  * @method PendingRequest api()

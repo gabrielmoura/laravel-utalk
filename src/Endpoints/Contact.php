@@ -71,4 +71,23 @@ class Contact extends UtalkBase
 
         return $req->collect();
     }
+
+    /**
+     * @description Retorna as anotações de um contato
+     *
+     * @param  string  $organizationId "AB_12-xyzEXAMPLE"
+     * @param  string  $contactId "AB_12-xyzEXAMPLE"
+     */
+    public function getNotes(string $organizationId, string $contactId): Collection
+    {
+
+        $req = $this->service
+            ->refreshToken()
+            ->get("/contacts/$contactId/notes/", [
+                'organizationId' => $organizationId,
+            ]);
+        $req->onError(fn ($e) => $this->error($e));
+
+        return $req->collect();
+    }
 }

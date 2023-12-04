@@ -9,8 +9,11 @@ use Gabrielmoura\LaravelUtalk\Traits\HasChat;
 use Gabrielmoura\LaravelUtalk\Traits\HasContact;
 use Gabrielmoura\LaravelUtalk\Traits\HasMember;
 use Gabrielmoura\LaravelUtalk\Traits\HasMessage;
+use Gabrielmoura\LaravelUtalk\Traits\HasNotification;
 use Gabrielmoura\LaravelUtalk\Traits\HasOrganizationInvites;
+use Gabrielmoura\LaravelUtalk\Traits\HasQuickAnswers;
 use Gabrielmoura\LaravelUtalk\Traits\HasReport;
+use Gabrielmoura\LaravelUtalk\Traits\HasScheduledMessage;
 use Gabrielmoura\LaravelUtalk\Traits\HasSector;
 use Gabrielmoura\LaravelUtalk\Traits\HasWebhook;
 use Illuminate\Http\Client\PendingRequest;
@@ -38,8 +41,11 @@ class UtalkService
     use HasContact;
     use HasMember;
     use HasMessage;
+    use HasNotification;
     use HasOrganizationInvites;
+    use HasQuickAnswers;
     use HasReport;
+    use HasScheduledMessage;
     use HasSector;
     use HasWebhook;
 
