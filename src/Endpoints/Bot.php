@@ -2,6 +2,7 @@
 
 namespace Gabrielmoura\LaravelUtalk\Endpoints;
 
+use Gabrielmoura\LaravelUtalk\Validation\Validation;
 use Illuminate\Support\Collection;
 
 class Bot extends UtalkBase
@@ -25,12 +26,8 @@ class Bot extends UtalkBase
         int $order = null,
         bool $final = false
     ): Collection {
-        if (strlen($title) <= 1) {
-            throw new UtalkException('O título deve ter pelo menos 2 caracteres');
-        }
-        if (strlen($message) <= 1) {
-            throw new UtalkException('A mensagem deve ter pelo menos 2 caracteres');
-        }
+        Validation::strBiggerThen($title, 1, 'título');
+        Validation::strBiggerThen($message, 1, 'mensagem');
         $req = $this->service
             ->refreshToken()
             ->post('/bots/greeting/', [
@@ -71,6 +68,13 @@ class Bot extends UtalkBase
         int $order = null,
         bool $final = false
     ): Collection {
+        Validation::strBiggerThen($title, 1, 'título');
+        Validation::strBiggerThen($body, 1, 'corpo da mensagem');
+        Validation::strBiggerThen($prefix, 1, 'prefixo');
+
+        Validation::strSmallerThen($body, 1024, 'corpo da mensagem');
+        Validation::strSmallerThen($prefix, 60, 'prefixo');
+
         $req = $this->service
             ->refreshToken()
             ->post('/bots/sector/', [
@@ -83,6 +87,7 @@ class Bot extends UtalkBase
                 'Title' => $title,
                 'Order' => $order,
                 'Final' => $final,
+                'SendTransferSectorMessage' => true,
             ]);
         $req->onError(fn ($e) => $this->error($e));
 
@@ -110,6 +115,7 @@ class Bot extends UtalkBase
         int $order = null,
         bool $final = false
     ): Collection {
+        Validation::strBiggerThen($title, 1, 'título');
         $req = $this->service
             ->refreshToken()
             ->post('/bots/tagging/', [

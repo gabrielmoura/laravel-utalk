@@ -33,4 +33,36 @@ class Validation
             throw new UtalkException('O timestamp não tem um formato válido.');
         }
     }
+
+    /**
+     * @description Valida se uma string é menor ou igual a um valor
+     *
+     * @param  string  $value Valor a ser validado
+     * @param  int  $smallerThen Valor máximo mínimo
+     * @param  string  $field Nome do campo
+     *
+     * @throws UtalkException
+     */
+    public static function strSmallerThen(string $value, int $smallerThen, string $field): void
+    {
+        if (strlen($value) <= $smallerThen) {
+            throw new UtalkException("O $field deve ter no máximo $smallerThen caracteres");
+        }
+    }
+
+    /**
+     * @description Valida se uma string é maior ou igual a um valor
+     *
+     * @param  string  $value Valor a ser validado
+     * @param  int  $biggerThen Valor mínimo
+     * @param  string  $field Nome do campo
+     *
+     * @throws UtalkException
+     */
+    public static function strBiggerThen(string $value, int $biggerThen, string $field): void
+    {
+        if (strlen($value) >= $biggerThen) {
+            throw new UtalkException("O $field deve ter pelo menos $biggerThen caracteres");
+        }
+    }
 }
