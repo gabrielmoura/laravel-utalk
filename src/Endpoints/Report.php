@@ -305,4 +305,57 @@ class Report extends UtalkBase
 
         return $req->collect();
     }
+
+    /**
+     * @description Retorna Avaliações por data
+     *
+     * @param  string  $organizationId "AB_12-xyzEXAMPLE"
+     * @param  string  $startDate "2023-11-24"
+     * @param  string  $endDate "2023-12-01"
+     * @param  string  $channelId "AB_12-xyzEXAMPLE"
+     */
+    public function conversationWindowsChatProjections(string $organizationId, string $startDate, string $endDate, string $channelId): Collection
+    {
+        Validation::timestamp($startDate);
+        Validation::timestamp($endDate);
+        $req = $this->service
+            ->refreshToken()
+            ->get('/reports/conversation-windows-chat-projections/', [
+                'organizationId' => $organizationId,
+                'StartDate' => $startDate,
+                'EndDate' => $endDate,
+                'ChannelId' => $channelId,
+            ]);
+        $req->onError(fn ($e) => $this->error($e));
+
+        return $req->collect();
+
+    }
+
+    /**
+     * @description Retorna projeções de janelas de conversa
+     *
+     * @param  string  $organizationId "AB_12-xyzEXAMPLE" ID da organização
+     * @param  string  $startDate Data de inicio ISO 8601
+     * @param  string  $endDate Data de fim ISO 8601
+     * @param  string  $chatIds ID do chat
+     * @param  string  $channelId ID do canal
+     */
+    public function conversationWindowsProjections(string $organizationId, string $startDate, string $endDate, string $chatIds, string $channelId): Collection
+    {
+        Validation::timestamp($startDate);
+        Validation::timestamp($endDate);
+        $req = $this->service
+            ->refreshToken()
+            ->get('/reports/conversation-windows-projections/', [
+                'organizationId' => $organizationId,
+                'StartDate' => $startDate,
+                'EndDate' => $endDate,
+                'ChatIds' => $chatIds,
+                'ChannelId' => $channelId,
+            ]);
+        $req->onError(fn ($e) => $this->error($e));
+
+        return $req->collect();
+    }
 }
