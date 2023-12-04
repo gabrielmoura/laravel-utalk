@@ -3,6 +3,7 @@
 namespace Gabrielmoura\LaravelUtalk;
 
 use Gabrielmoura\LaravelUtalk\Endpoints\ActivityLogs;
+use Gabrielmoura\LaravelUtalk\Endpoints\Bot;
 use Gabrielmoura\LaravelUtalk\Endpoints\Channel;
 use Gabrielmoura\LaravelUtalk\Endpoints\Chat;
 use Gabrielmoura\LaravelUtalk\Endpoints\Contact;
@@ -26,6 +27,7 @@ use Illuminate\Support\Facades\Facade;
  * @method OrganizationInvites organizationInvites() OrganizationInvites
  * @method Report report() Report
  * @method Contact contact() Contact
+ * @method Bot bot() Bot
  * @method withToken(string $token)
  * @method refreshToken(string $token = null)
  * @method PendingRequest api()

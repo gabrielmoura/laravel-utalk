@@ -3,6 +3,7 @@
 namespace Gabrielmoura\LaravelUtalk;
 
 use Gabrielmoura\LaravelUtalk\Traits\HasActivityLog;
+use Gabrielmoura\LaravelUtalk\Traits\HasBot;
 use Gabrielmoura\LaravelUtalk\Traits\HasChannel;
 use Gabrielmoura\LaravelUtalk\Traits\HasChat;
 use Gabrielmoura\LaravelUtalk\Traits\HasContact;
@@ -31,6 +32,7 @@ use Illuminate\Support\Facades\Http;
 class UtalkService
 {
     use HasActivityLog;
+    use HasBot;
     use HasChannel;
     use HasChat;
     use HasContact;
